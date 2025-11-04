@@ -36,10 +36,6 @@
     }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     .hrule { border: 0; height: 3px; background: #000080; margin: 25px 0; border-radius: 2px; }
-    .family-photo {
-      max-width: 100%; height: auto; border: 3px solid #000080; border-radius: 12px;
-      margin: 20px auto; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
     table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
     th, td { padding: 12px; text-align: center; border: 1px solid #000; }
     th { background: #f0f0f0; font-weight: bold; }
@@ -75,18 +71,20 @@
   <div class="header">THE FAMILY WORLD WIDE WEB HOME PAGE - EST. 2021</div>
 
   <div class="title">The Family</div>
-  <div class="subtitle">A Family Website with Live Crypto Prices!</div>
+  <div class="subtitle">A Family Website!</div>
 
   <div class="marquee" id="btc-banner">*** LIVE BTC PRICE: Loading... ***</div>
 
   <div class="welcome">Welcome to Our Family Page!</div>
-  <p style="text-align:center;margin:15px 0;">We're holders of Bitcoin, Ethereum, and Solana!<br></p>
 
   <hr class="hrule">
 
-  <!-- SUMMER 2025 FAMILY PHOTO -->
-  <img src="https://i.postimg.cc/C5zknfPL/IMG-4991.jpg" alt="The Family - Summer 2025" class="family-photo">
-  <p style="text-align:center;font-style:italic;margin:10px 0 20px;"><i>The Family - Summer 2025</i></p>
+  <!-- SUMMER 2025 FAMILY PHOTO (SMALL 150x150) -->
+  <div style="text-align:center;margin:20px 0;">
+    <img src="https://i.postimg.cc/C5zknfPL/IMG-4991.jpg" alt="The Family - Summer 2025" 
+         style="width:150px;height:150px;object-fit:cover;border:3px solid #000080;border-radius:8px;">
+    <p style="margin:8px 0 0;font-style:italic;color:#000080;"><i>The Family - Summer 2022</i></p>
+  </div>
 
   <hr class="hrule">
 
@@ -110,21 +108,21 @@
     <table class="wallet-grid">
       <tr><th colspan="2">Our Family Crypto Wallets</th></tr>
       <tr><td><b>Bitcoin:</b></td><td><span class="wallet" id="btc-wallet">1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd</span><br><button class="copybtn" onclick="copyAddr('btc-wallet',this)">Copy BTC</button></td></tr>
-      <tr><td><b>Ethereum:</b></td><td><span class="wallet" id="eth-wallet">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span><br><button class="copybtn" onclick="copyAddr('eth-wallet',this)">Copy ETH</button></td></tr>
-      <tr><td><b>Solana:</b></td><td><span class="wallet" id="sol-wallet">7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA</span><br><button class="copybtn" onclick="copyAddr('sol-wallet',this)">Copy SOL</button></td></tr>
+      <tr><td><b>Ethereum:</b></td><td><span class="wallet" id="eth-wallet">0x5AAB87aB5B84D01Fce44207823982F04Bb037440</span><br><button class="copybtn" onclick="copyAddr('eth-wallet',this)">Copy ETH</button></td></tr>
+      <tr><td><b>Solana:</b></td><td><span class="wallet" id="sol-wallet">Au7cmgkjWfn6hEHEoakPM3b8kWXMmgNq2ymvDWpQaVJM</span><br><button class="copybtn" onclick="copyAddr('sol-wallet',this)">Copy SOL</button></td></tr>
     </table>
   </div>
 
   <hr class="hrule">
 
-  <!-- MEET THE FAMILY - ALL REAL PHOTOS! -->
+  <!-- MEET THE FAMILY - ALL REAL PHOTOS -->
   <div style="text-align:center;margin:20px 0;">
     <h2 style="color:#000080;font-family:'Times New Roman',serif;">Meet the Family</h2>
   </div>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;padding:10px;">
 
-    <!-- Jordan (REAL PHOTO!) -->
+    <!-- Jordan -->
     <div style="text-align:center;">
       <img src="https://i.postimg.cc/MKDJpPfq/20230901-094534-Copy.jpg" alt="Jordan" 
            style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">
@@ -132,7 +130,7 @@
       <div class="bio">Programmer. Loves Cycling, hiking and being a Dad.</div>
     </div>
 
-    <!-- Anna (REAL PHOTO!) -->
+    <!-- Anna -->
     <div style="text-align:center;">
       <img src="https://i.postimg.cc/FsJhFgbn/mitenefa41f36c-424f-4f33-9421-b862b38e01b9.jpg" alt="Anna" 
            style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">
@@ -140,7 +138,7 @@
       <div class="bio">Bakes the best muffins and loves being a Mom.</div>
     </div>
 
-    <!-- Abraham (REAL PHOTO!) -->
+    <!-- Abraham -->
     <div style="text-align:center;">
       <img src="https://i.postimg.cc/DzGGqXKP/20230629-093843.jpg" alt="Abraham" 
            style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">

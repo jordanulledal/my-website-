@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Family World Wide Web Home Page</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       background: #ffffff;
@@ -17,204 +15,55 @@
       line-height: 1.5;
       padding: 10px;
     }
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 10px;
-    }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 10px; }
     .header {
-      background: #000080;
-      color: #ffffff;
-      font-weight: bold;
-      font-size: 16px;
-      text-align: center;
-      padding: 12px;
-      border-radius: 8px 8px 0 0;
-      margin-top: 10px;
+      background: #000080; color: #ffffff; font-weight: bold; font-size: 16px;
+      text-align: center; padding: 12px; border-radius: 8px 8px 0 0; margin-top: 10px;
     }
     .title {
-      font-size: 32px;
-      font-weight: bold;
-      color: #000080;
-      text-align: center;
-      margin: 20px 0 8px;
-      font-family: "Times New Roman", serif;
+      font-size: 32px; font-weight: bold; color: #000080; text-align: center;
+      margin: 20px 0 8px; font-family: "Times New Roman", serif;
     }
-    .subtitle {
-      font-size: 18px;
-      color: #000080;
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    .subtitle { font-size: 18px; color: #000080; text-align: center; margin-bottom: 20px; }
     .marquee {
-      background: #ffff00;
-      color: #ff0000;
-      font-weight: bold;
-      padding: 10px;
-      text-align: center;
-      font-size: 14px;
-      overflow: hidden;
-      white-space: nowrap;
-      animation: scroll 20s linear infinite;
-      margin: 10px 0;
-      border-radius: 6px;
-    }
-    @keyframes scroll {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+      background: #ffff00; color: #ff0000; font-weight: bold; padding: 10px;
+      text-align: center; font-size: 14px; margin: 10px 0; border-radius: 6px;
+      min-height: 20px; display: flex; align-items: center; justify-content: center;
     }
     .welcome {
-      font-family: "Comic Sans MS", cursive;
-      font-size: 20px;
-      color: #ff0000;
-      text-align: center;
-      font-weight: bold;
-      animation: blink 1s infinite;
+      font-family: "Comic Sans MS", cursive; font-size: 20px; color: #ff0000;
+      text-align: center; font-weight: bold; animation: blink 1s infinite;
     }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .hrule { border: 0; height: 3px; background: #000080; margin: 25px 0; border-radius: 2px; }
+    .family-photo {
+      max-width: 100%; height: auto; border: 3px solid #000080; border-radius: 12px;
+      margin: 20px auto; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .hrule {
-      border: 0;
-      height: 3px;
-      background: #000080;
-      margin: 25px 0;
-      border-radius: 2px;
-    }
-    .photo {
-      width: 150px;
-      height: 150px;
-      border: 3px solid #000080;
-      background: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-style: italic;
-      color: #666;
-      margin: 15px auto;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-    .photo small {
-      font-size: 11px;
-      margin-top: 5px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 15px 0;
-      font-size: 14px;
-    }
-    th, td {
-      padding: 12px;
-      text-align: center;
-      border: 1px solid #000;
-    }
-    th {
-      background: #f0f0f0;
-      font-weight: bold;
-    }
-    .price {
- Patches: {
-      font-family: "Comic Sans MS", cursive;
-      font-size: 20px;
-      font-weight: bold;
-      color: #000080;
-    }
-    .change-up {
-      color: #006400;
-      font-weight: bold;
-    }
-    .change-down {
-      color: #8B0000;
-      font-weight: bold;
-    }
-    .wallet {
-      font-family: "Courier New", monospace;
-      font-size: 12px;
-      word-break: break-all;
-      display: block;
-      margin: 8px 0;
-    }
+    table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+    th, td { padding: 12px; text-align: center; border: 1px solid #000; }
+    th { background: #f0f0f0; font-weight: bold; }
+    .price { font-family: "Comic Sans MS", cursive; font-size: 20px; font-weight: bold; color: #000080; }
+    .change-up { color: #006400; font-weight: bold; }
+    .change-down { color: #8B0000; font-weight: bold; }
+    .wallet { font-family: "Courier New", monospace; font-size: 12px; word-break: break-all; display: block; margin: 8px 0; }
     .copybtn {
-      background: #c0c0c0;
-      border: 2px outset #ffffff;
-      font-size: 13px;
-      padding: 6px 12px;
-      cursor: pointer;
-      border-radius: 4px;
-      margin-top: 8px;
+      background: #c0c0c0; border: 2px outset #ffffff; font-size: 13px; padding: 6px 12px;
+      cursor: pointer; border-radius: 4px; margin-top: 8px;
     }
-    .copybtn:active {
-      border: 2px inset #ffffff;
-    }
-    .bio {
-      font-size: 13px;
-      line-height: 1.5;
-      margin-top: 8px;
-    }
-    .footer {
-      font-size: 12px;
-      color: #666666;
-      text-align: center;
-      margin: 30px 0 20px;
-    }
-    .footer a {
-      color: #0000ee;
-      text-decoration: underline;
-      margin: 0 8px;
-    }
-    .netscape {
-      font-size: 11px;
-      color: #666666;
-      text-align: center;
-      margin: 15px 0;
-    }
-    .under-construction {
-      text-align: center;
-      margin: 25px 0;
-      font-style: italic;
-    }
-    .under-construction img {
-      vertical-align: middle;
-      margin-right: 8px;
-    }
+    .copybtn:active { border: 2px inset #ffffff; }
+    .bio { font-size: 13px; line-height: 1.5; margin-top: 8px; }
+    .footer { font-size: 12px; color: #666666; text-align: center; margin: 30px 0 20px; }
+    .footer a { color: #0000ee; text-decoration: underline; margin: 0 8px; }
+    .under-construction { text-align: center; margin: 25px 0; font-style: italic; }
+    .under-construction img { vertical-align: middle; margin-right: 8px; }
 
-    /* Responsive Tables */
     @media (max-width: 768px) {
-      .responsive-table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      table {
-        min-width: 600px;
-      }
+      .responsive-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { min-width: 600px; }
     }
-
-    /* Stack family & wallets on mobile */
     @media (max-width: 600px) {
-      .family-grid, .wallet-grid, .price-grid {
-        display: block;
-      }
-      .family-grid td, .wallet-grid td, .price-grid td {
-        display: block;
-        width: 100%;
-        border: none;
-        border-bottom: 1px solid #ccc;
-        padding: 15px;
-      }
-      .family-grid th, .wallet-grid th {
-        display: none;
-      }
-      .price-grid th {
-        font-size: 16px;
-      }
-      .title { font-size: 28px; }
-      .subtitle { font-size: 16px; }
-      .welcome { font-size: 18px; }
+      .title { font-size: 28px; } .subtitle { font-size: 16px; } .welcome { font-size: 18px; }
       .marquee { font-size: 13px; padding: 8px; }
     }
   </style>
@@ -223,58 +72,32 @@
 
 <div class="container">
 
-  <!-- HEADER -->
-  <div class="header">
-    THE FAMILY WORLD WIDE WEB HOME PAGE - EST. 2021
-  </div>
+  <div class="header">THE FAMILY WORLD WIDE WEB HOME PAGE - EST. 2021</div>
 
-  <!-- TITLE -->
   <div class="title">The Family</div>
   <div class="subtitle">A Family Website with Live Crypto Prices!</div>
 
-  <!-- MARQUEE -->
-  <div class="marquee">
-    *** LIVE CRYPTO PRICES *** BITCOIN *** ETHEREUM *** SOLANA *** UPDATED EVERY 30 SECONDS ***
-  </div>
+  <div class="marquee" id="btc-banner">*** LIVE BTC PRICE: Loading... ***</div>
 
-  <!-- WELCOME -->
   <div class="welcome">Welcome to Our Family Page!</div>
-  <p style="text-align:center;margin:15px 0;">
-    We're holders of Bitcoin, Ethereum, and Solana!<br>
-  </p>
+  <p style="text-align:center;margin:15px 0;">We're holders of Bitcoin, Ethereum, and Solana!<br></p>
 
   <hr class="hrule">
 
-  <!-- FAMILY PHOTO -->
- <img src=https://i.postimg.cc/C5zknfPL/IMG-4991.jpg alt="The Family - Summer 2022" style="width:150px;height:150px;object-fit:cover;border:3px solid #000080;border-radius:8px;margin:15px auto;display:block;">
-  <p style="text-align:center;font-style:italic;margin-bottom:20px;">
-    <i>The Family - Summer 2022</i>
-  </p>
+  <!-- SUMMER 2025 FAMILY PHOTO -->
+  <img src="https://i.postimg.cc/C5zknfPL/IMG-4991.jpg" alt="The Family - Summer 2025" class="family-photo">
+  <p style="text-align:center;font-style:italic;margin:10px 0 20px;"><i>The Family - Summer 2025</i></p>
 
   <hr class="hrule">
 
   <!-- CRYPTO PRICES -->
   <div class="responsive-table">
     <table class="price-grid">
+      <tr><th colspan="3">Live Cryptocurrency Prices</th></tr>
       <tr>
-        <th colspan="3">Live Cryptocurrency Prices</th>
-      </tr>
-      <tr>
-        <td>
-          <b>Bitcoin (BTC)</b><br>
-          <div class="price" id="btc-price">Loading...</div>
-          <div id="btc-change"></div>
-        </td>
-        <td>
-          <b>Ethereum (ETH)</b><br>
-          <div class="price" id="eth-price">Loading...</div>
-          <div id="eth-change"></div>
-        </td>
-        <td>
-          <b>Solana (SOL)</b><br>
-          <div class="price" id="sol-price">Loading...</div>
-          <div id="sol-change"></div>
-        </td>
+        <td><b>Bitcoin (BTC)</b><br><div class="price" id="btc-price">Loading...</div><div id="btc-change"></div></td>
+        <td><b>Ethereum (ETH)</b><br><div class="price" id="eth-price">Loading...</div><div id="eth-change"></div></td>
+        <td><b>Solana (SOL)</b><br><div class="price" id="sol-price">Loading...</div><div id="sol-change"></div></td>
       </tr>
     </table>
   </div>
@@ -285,84 +108,57 @@
   <!-- WALLET ADDRESSES -->
   <div class="responsive-table">
     <table class="wallet-grid">
-      <tr>
-        <th colspan="2">Our Family Crypto Wallets</th>
-      </tr>
-      <tr>
-        <td><b>Bitcoin:</b></td>
-        <td>
-          <span class="wallet" id="btc-wallet">1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd</span><br>
-          <button class="copybtn" onclick="copyAddr('btc-wallet',this)">Copy BTC</button>
-        </td>
-      </tr>
-      <tr>
-        <td><b>Ethereum:</b></td>
-        <td>
-          <span class="wallet" id="eth-wallet">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span><br>
-          <button class="copybtn" onclick="copyAddr('eth-wallet',this)">Copy ETH</button>
-        </td>
-      </tr>
-      <tr>
-        <td><b>Solana:</b></td>
-        <td>
-          <span class="wallet" id="sol-wallet">7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA</span><br>
-          <button class="copybtn" onclick="copyAddr('sol-wallet',this)">Copy SOL</button>
-        </td>
-      </tr>
+      <tr><th colspan="2">Our Family Crypto Wallets</th></tr>
+      <tr><td><b>Bitcoin:</b></td><td><span class="wallet" id="btc-wallet">1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd</span><br><button class="copybtn" onclick="copyAddr('btc-wallet',this)">Copy BTC</button></td></tr>
+      <tr><td><b>Ethereum:</b></td><td><span class="wallet" id="eth-wallet">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span><br><button class="copybtn" onclick="copyAddr('eth-wallet',this)">Copy ETH</button></td></tr>
+      <tr><td><b>Solana:</b></td><td><span class="wallet" id="sol-wallet">7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA</span><br><button class="copybtn" onclick="copyAddr('sol-wallet',this)">Copy SOL</button></td></tr>
     </table>
   </div>
 
   <hr class="hrule">
 
-  <!-- MEET THE FAMILY -->
-  <div class="responsive-table">
-    <table class="family-grid">
-      <tr>
-        <th colspan="2">Meet the Family</th>
-      </tr>
-      <tr>
-        <td>
-          <b>Jordan</b><br>
-          <i>Dad, Age 32</i><br>
-          <div class="bio">
-            Programmer. Loves Cycling, hiking and being a Dad.
-          </div>
-        </td>
-        <td>
-          <b>Anna</b><br>
-          <i>Mom, Age 25</i><br>
-          <div class="bio">
-            Bakes the best muffins and loves being a Mom.
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Abraham</b><br>
-          <i>Son, Age 3</i><br>
-          <div class="bio">
-            Loves to ride his bike and hang at the beach.
-          </div>
-        </td>
-        <td></td>
-      </tr>
-    </table>
+  <!-- MEET THE FAMILY - ALL REAL PHOTOS! -->
+  <div style="text-align:center;margin:20px 0;">
+    <h2 style="color:#000080;font-family:'Times New Roman',serif;">Meet the Family</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;padding:10px;">
+
+    <!-- Jordan (REAL PHOTO!) -->
+    <div style="text-align:center;">
+      <img src="https://i.postimg.cc/MKDJpPfq/20230901-094534-Copy.jpg" alt="Jordan" 
+           style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">
+      <br><b>Jordan</b><br><i>Dad, Age 32</i>
+      <div class="bio">Programmer. Loves Cycling, hiking and being a Dad.</div>
+    </div>
+
+    <!-- Anna (REAL PHOTO!) -->
+    <div style="text-align:center;">
+      <img src="https://i.postimg.cc/FsJhFgbn/mitenefa41f36c-424f-4f33-9421-b862b38e01b9.jpg" alt="Anna" 
+           style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">
+      <br><b>Anna</b><br><i>Mom, Age 25</i>
+      <div class="bio">Bakes the best muffins and loves being a Mom.</div>
+    </div>
+
+    <!-- Abraham (REAL PHOTO!) -->
+    <div style="text-align:center;">
+      <img src="https://i.postimg.cc/DzGGqXKP/20230629-093843.jpg" alt="Abraham" 
+           style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">
+      <br><b>Abraham</b><br><i>Son, Age 3</i>
+      <div class="bio">Loves to ride his bike and hang at the beach.</div>
+    </div>
+
   </div>
 
   <hr class="hrule">
 
-  <!-- LAST UPDATED -->
-  <div style="font-size:12px;color:#666666;text-align:center;" id="last-updated">
-    Last updated: Loading...
-  </div>
+  <div style="font-size:12px;color:#666666;text-align:center;" id="last-updated">Last updated: Loading...</div>
 
-  <!-- UNDER CONSTRUCTION -->
   <div class="under-construction">
     <img src="data:image/gif;base64,R0lGODlhFAALAIAAAAAAAP///yH5BAEAAAEALAAAAAAUAAkAAAIRhBEtpUu2cHyw1o2n0i8aoIqa7jYAOw==" width="77" height="11" alt="Under Construction">
     <i>More crypto tips and family stories coming soon!</i>
   </div>
 
-  <!-- FOOTER -->
   <div class="footer">
     © 2021-2025 The Family Club. All Rights Reserved.<br>
     <a href="#">Home</a> | <a href="#">Crypto Tips</a> | <a href="#">Guestbook</a> | <a href="#">Links</a>
@@ -371,42 +167,30 @@
 </div>
 
 <script>
-  const WALLETS = {
-    btc: '1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd',
-    eth: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
-    sol: '7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA'
-  };
+  const WALLETS = { btc: '1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd', eth: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F', sol: '7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA' };
   const API = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true';
   const $ = id => document.getElementById(id);
-  const els = {
-    btcP: $('btc-price'), btcC: $('btc-change'),
-    ethP: $('eth-price'), ethC: $('eth-change'),
-    solP: $('sol-price'), solC: $('sol-change'),
-    upd: $('last-updated'), err: $('error-message')
-  };
+  const els = { banner: $('btc-banner'), btcP: $('btc-price'), btcC: $('btc-change'), ethP: $('eth-price'), ethC: $('eth-change'), solP: $('sol-price'), solC: $('sol-change'), upd: $('last-updated'), err: $('error-message') };
   const fmtPrice = n => `$${n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
-  const fmtChange = v => {
-    const sign = v >= 0 ? 'up' : 'down';
-    const color = v >= 0 ? 'change-up' : 'change-down';
-    const icon = v >= 0 ? 'up' : 'down';
-    return `<span class="${color} blink">${icon} ${Math.abs(v).toFixed(2)}%</span>`;
-  };
+  const fmtChange = v => { const sign = v >= 0 ? '+' : ''; return ` (${sign}${v.toFixed(2)}%)`; };
   async function fetchPrices() {
     try {
       const r = await fetch(API, {cache: 'no-store'});
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const d = await r.json();
+      els.banner.innerHTML = `*** LIVE BTC PRICE: ${fmtPrice(d.bitcoin.usd)}${fmtChange(d.bitcoin.usd_24h_change)} ***`;
       els.btcP.textContent = fmtPrice(d.bitcoin.usd);
-      els.btcC.innerHTML = fmtChange(d.bitcoin.usd_24h_change);
+      els.btcC.innerHTML = `<span class="${d.bitcoin.usd_24h_change >= 0 ? 'change-up' : 'change-down'} blink">${d.bitcoin.usd_24h_change >= 0 ? 'up' : 'down'} ${Math.abs(d.bitcoin.usd_24h_change).toFixed(2)}%</span>`;
       els.ethP.textContent = fmtPrice(d.ethereum.usd);
-      els.ethC.innerHTML = fmtChange(d.ethereum.usd_24h_change);
+      els.ethC.innerHTML = `<span class="${d.ethereum.usd_24h_change >= 0 ? 'change-up' : 'change-down'} blink">${d.ethereum.usd_24h_change >= 0 ? 'up' : 'down'} ${Math.abs(d.ethereum.usd_24h_change).toFixed(2)}%</span>`;
       els.solP.textContent = fmtPrice(d.solana.usd);
-      els.solC.innerHTML = fmtChange(d.solana.usd_24h_change);
+      els.solC.innerHTML = `<span class="${d.solana.usd_24h_change >= 0 ? 'change-up' : 'change-down'} blink">${d.solana.usd_24h_change >= 0 ? 'up' : 'down'} ${Math.abs(d.solana.usd_24h_change).toFixed(2)}%</span>`;
       const now = new Date();
       els.upd.textContent = 'Last updated: ' + now.toLocaleString();
       els.err.textContent = '';
     } catch (e) {
       els.err.textContent = 'ERROR: Crypto prices offline. Retrying...';
+      els.banner.innerHTML = '*** LIVE BTC PRICE: Loading... ***';
     }
   }
   function copyAddr(id, btn) {
@@ -417,7 +201,6 @@
       setTimeout(() => btn.innerHTML = old, 1500);
     });
   }
-  // INIT
   Object.entries(WALLETS).forEach(([k, v]) => $(k + '-wallet').textContent = v);
   fetchPrices();
   setInterval(fetchPrices, 30000);

@@ -1,165 +1,379 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Crypto Price Tracker - 2000 Edition</title>
+<title>The Johnson Family Crypto Home Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <style>
-  body,td,th {font-family:Arial,Helvetica,sans-serif; font-size:12px; color:#000000;}
-  body {background:#ffffff; margin:10px;}
-  a {color:#0000ee; text-decoration:underline;}
-  a:visited {color:#551a8b;}
-  table {border-collapse:collapse; width:100%; max-width:800px; margin:0 auto;}
-  td,th {border:1px solid #000000; padding:6px; vertical-align:top;}
-  .header {background:#0000ff; color:#ffffff; font-weight:bold; text-align:center;}
-  .price {font-family:"Comic Sans MS",cursive; font-size:18px; font-weight:bold;}
-  .positive {color:#008000; animation:blink 1s infinite;}
-  .negative {color:#ff0000; animation:blink 1s infinite;}
-  .center {text-align:center;}
-  .small {font-size:10px; color:#666666;}
-  .marquee {font-weight:bold; color:#ff0000;}
-  .blink {animation:blink 1s infinite;}
-  @keyframes blink {0%,100%{opacity:1}50%{opacity:0}}
-  .logo {font-family:"Times New Roman",serif; font-size:28px; font-weight:bold; color:#0000ff;}
-  .under {color:#ff9900; font-style:italic;}
-  .copybtn {background:#c0c0c0; border:2px outset #ffffff; padding:2px 6px; cursor:hand; font-weight:bold;}
-  .copybtn:active {border:2px inset #ffffff;}
+  body {
+    margin: 0;
+    background: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000000;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  td, th {
+    font-size: 12px;
+    padding: 6px;
+    vertical-align: top;
+  }
+  a {
+    color: #0000ee;
+    text-decoration: underline;
+  }
+  a:visited {
+    color: #551a8b;
+  }
+  .header {
+    background: #000080;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px;
+  }
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000080;
+    text-align: center;
+    margin: 15px 0 5px;
+    font-family: "Times New Roman", serif;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: #000080;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .welcome {
+    font-family: "Comic Sans MS", cursive;
+    font-size: 18px;
+    color: #ff0000;
+    text-align: center;
+    font-weight: bold;
+  }
+  .blink {
+    animation: blink 1s infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .hrule {
+    border: 0;
+    height: 2px;
+    background: #000080;
+    margin: 20px 0;
+  }
+  .footer {
+    font-size: 10px;
+    color: #666666;
+    text-align: center;
+    margin-top: 25px;
+  }
+  .netscape {
+    font-size: 10px;
+    color: #666666;
+    text-align: center;
+    margin: 15px 0;
+  }
+  .marquee {
+    background: #ffff00;
+    color: #ff0000;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .price {
+    font-family: "Comic Sans MS", cursive;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000080;
+  }
+  .change-up {
+    color: #006400;
+    font-weight: bold;
+  }
+  .change-down {
+    color: #8B0000;
+    font-weight: bold;
+  }
+  .wallet {
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    word-break: break-all;
+  }
+  .copybtn {
+    background: #c0c0c0;
+    border: 2px outset #ffffff;
+    font-size: 11px;
+    padding: 2px 6px;
+    cursor: hand;
+  }
+  .copybtn:active {
+    border: 2px inset #ffffff;
+  }
+  .photo {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #000080;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: #666;
+    margin: 0 auto;
+  }
+  .bio {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .new {
+    color: #ff0000;
+    font-weight: bold;
+  }
 </style>
 </head>
-<body>
+<body bgcolor="#ffffff" text="#000000" link="#0000ee" vlink="#551a8b">
 
 <center>
-<span class="logo">Crypto Price Tracker 2000</span><br>
-<font size="2" color="#666666">Best viewed in Netscape Navigator 4.7</font>
-<br><br>
 
-<marquee class="marquee" behavior="scroll" direction="left">
-*** LIVE PRICES *** BITCOIN *** ETHEREUM *** SOLANA *** UPDATED EVERY 30 SECONDS ***
+<!-- NETSCAPE HEADER -->
+<table width="760" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="header" colspan="2">
+      THE JOHNSON FAMILY CRYPTO HOME PAGE - EST. 1997
+    </td>
+  </tr>
+</table>
+
+<!-- TITLE -->
+<div class="title">The Johnson Family</div>
+<div class="subtitle">A Family Website with Live Crypto Prices!</div>
+
+<!-- MARQUEE -->
+<marquee class="marquee" behavior="scroll" direction="left" scrollamount="4">
+*** LIVE CRYPTO PRICES *** BITCOIN *** ETHEREUM *** SOLANA *** UPDATED EVERY 30 SECONDS ***
 </marquee>
-</center>
 
-<div id="error-message" style="text-align:center;color:red;font-weight:bold;"></div>
+<br>
 
-<table cellspacing="0" cellpadding="0">
+<!-- WELCOME -->
+<div class="welcome blink">Welcome to Our Crypto Family Page!</div>
+<p style="text-align:center;font-size:12px;">
+  We're the Johnsons — proud holders of Bitcoin, Ethereum, and Solana!<br>
+  <span class="new blink">NEW!</span> Live prices added June 2025!
+</p>
+
+<hr class="hrule">
+
+<!-- FAMILY PHOTO -->
+<table width="760" border="0" cellpadding="10">
   <tr>
-    <td colspan="2" class="header">CRYPTOCURRENCY PRICES</td>
+    <td align="center">
+      <div class="photo">Family Photo<br><small>(150x150)</small></div>
+      <br><i>The Johnsons - Summer 2025</i>
+    </td>
+  </tr>
+</table>
+
+<hr class="hrule">
+
+<!-- CRYPTO PRICES -->
+<table width="760" border="1" cellpadding="8" cellspacing="0" frame="box" rules="all">
+  <tr bgcolor="#f0f0f0">
+    <th colspan="3">Live Cryptocurrency Prices</th>
   </tr>
   <tr>
-    <td width="50%">
+    <td width="33%" align="center">
       <b>Bitcoin (BTC)</b><br>
-      <span class="price" id="btc-price">Loading...</span><br>
-      <span id="btc-change"></span>
+      <div class="price" id="btc-price">Loading...</div>
+      <div id="btc-change"></div>
+    </td>
+    <td width="33%" align="center">
+      <b>Ethereum (ETH)</b><br>
+      <div class="price" id="eth-price">Loading...</div>
+      <div id="eth-change"></div>
+    </td>
+    <td width="33%" align="center">
+      <b>Solana (SOL)</b><br>
+      <div class="price" id="sol-price">Loading...</div>
+      <div id="sol-change"></div>
+    </td>
+  </tr>
+</table>
+
+<div id="error-message" style="color:red;font-weight:bold;text-align:center;"></div>
+
+<hr class="hrule">
+
+<!-- WALLET ADDRESSES -->
+<table width="760" border="1" cellpadding="8" cellspacing="0" frame="box" rules="all">
+  <tr bgcolor="#f0f0f0">
+    <th colspan="2">Our Family Crypto Wallets</th>
+  </tr>
+  <tr>
+    <td width="25%"><b>Bitcoin:</b></td>
+    <td>
+      <span class="wallet" id="btc-wallet">1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd</span><br>
+      <button class="copybtn" onclick="copyAddr('btc-wallet',this)">Copy BTC</button>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Ethereum:</b></td>
+    <td>
+      <span class="wallet" id="eth-wallet">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span><br>
+      <button class="copybtn" onclick="copyAddr('eth-wallet',this)">Copy ETH</button>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Solana:</b></td>
+    <td>
+      <span class="wallet" id="sol-wallet">7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA</span><br>
+      <button class="copybtn" onclick="copyAddr('sol-wallet',this)">Copy SOL</button>
+    </td>
+  </tr>
+</table>
+
+<hr class="hrule">
+
+<!-- MEET THE FAMILY -->
+<table width="760" border="1" cellpadding="8" cellspacing="0" frame="box" rules="all">
+  <tr bgcolor="#f0f0f0">
+    <th colspan="2">Meet the Family</th>
+  </tr>
+  <tr>
+    <td width="50%">
+      <b>Mark Johnson</b><br>
+      <i>Dad, Age 45</i><br>
+      <div class="bio">
+        Software engineer. First bought Bitcoin in 2013. Loves HODLing and fishing.
+      </div>
     </td>
     <td width="50%">
-      <b>Ethereum (ETH)</b><br>
-      <span class="price" id="eth-price">Loading...</span><br>
-      <span id="eth-change"></span>
+      <b>Linda Johnson</b><br>
+      <i>Mom, Age 42</i><br>
+      <div class="bio">
+        Manages our crypto portfolio. Uses Ethereum for NFTs. Bakes the best apple pie.
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Emily Johnson</b><br>
+      <i>Daughter, Age 16</i><br>
+      <div class="bio">
+        Saves allowance in Solana. Trades meme coins. Still loves Tamagotchi.
+      </div>
+    </td>
+    <td>
+      <b>Tommy Johnson</b><br>
+      <i>Son, Age 12</i><br>
+      <div class="bio">
+        Owns 0.001 BTC from grandpa. Wants to buy a Tesla with crypto someday.
+      </div>
     </td>
   </tr>
 </table>
 
-<br>
+<hr class="hrule">
 
-<table cellspacing="0" cellpadding="0">
-  <tr><td colspan="2" class="header">MY WALLET ADDRESSES</td></tr>
-  <tr>
-    <td><b>Bitcoin Wallet:</b></td>
-    <td>
-      <tt><span id="btc-wallet">1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd</span></tt>
-      <button class="copybtn" onclick="copyAddr('btc-wallet',this)">Copy</button>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Ethereum Wallet:</b></td>
-    <td>
-      <tt><span id="eth-wallet">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span></tt>
-      <button class="copybtn" onclick="copyAddr('eth-wallet',this)">Copy</button>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Solana Wallet:</b></td>
-    <td>
-      <tt><span id="sol-wallet">7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA</span></tt>
-      <button class="copybtn" onclick="copyAddr('sol-wallet',this)">Copy</button>
-    </td>
-  </tr>
-</table>
+<!-- LAST UPDATED -->
+<div style="font-size:11px;color:#666666;" id="last-updated">
+  Last updated: Loading...
+</div>
 
-<br>
-<center>
-<div id="last-updated" class="small">Connecting to server...</div>
-<br>
-<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="88" height="31" alt="Under Construction">
-<span class="under">Under Construction - More coins coming soon!</span>
-<br><br>
-<font size="1">© 2025 Crypto2000 Inc. All Rights Reserved.</font>
+<!-- NETSCAPE BADGE -->
+<div class="netscape">
+  <b>Best viewed with</b><br>
+  <b>NETSCAPE NAVIGATOR 4.0 or later</b>
+</div>
+
+<!-- UNDER CONSTRUCTION -->
+<div style="margin:20px 0;">
+  <img src="data:image/gif;base64,R0lGODlhFAALAIAAAAAAAP///yH5BAEAAAEALAAAAAAUAAkAAAIRhBEtpUu2cHyw1o2n0i8aoIqa7jYAOw==" width="77" height="11" alt="Under Construction">
+  <i>More crypto tips and family stories coming soon!</i>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 1997-2025 The Johnson Family Crypto Club. All Rights Reserved.<br>
+  <a href="#">Home</a> | <a href="#">Crypto Tips</a> | <a href="#">Guestbook</a> | <a href="#">Links</a>
+</div>
+
 </center>
 
 <script>
-  // ==== CONFIG ====
+  // ==== CONFIG: YOUR WALLETS ====
   const WALLETS = {
     btc: '1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd',
     eth: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
     sol: '7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA'
   };
-  const UPDATE_MS = 30000;
-  const API = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true';
 
-  // ==== DOM ====
+  // CoinGecko API (free, no key)
+  const API = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true';
+
   const $ = id => document.getElementById(id);
   const els = {
     btcP: $('btc-price'), btcC: $('btc-change'),
     ethP: $('eth-price'), ethC: $('eth-change'),
+    solP: $('sol-price'), solC: $('sol-change'),
     upd:  $('last-updated'), err: $('error-message')
   };
 
-  // ==== HELPERS ====
   const fmtPrice = n => `$${n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
   const fmtChange = v => {
-    const sign = v>=0?'up':'down';
-    const cls  = v>=0?'positive':'negative';
-    const txt  = `${sign} ${Math.abs(v).toFixed(2)}%`;
-    return {text: `<font class="${cls}">${txt}</font>`, cls};
+    const sign = v >= 0 ? 'up' : 'down';
+    const color = v >= 0 ? 'change-up' : 'change-down';
+    const icon = v >= 0 ? 'up' : 'down';
+    return `<span class="${color} blink">${icon} ${Math.abs(v).toFixed(2)}%</span>`;
   };
-  const showErr = msg => els.err.innerHTML = `<b>ERROR:</b> ${msg}`;
-  const clearErr = () => els.err.innerHTML = '';
 
-  // ==== FETCH ====
-  async function fetchPrices(){
-    try{
-      const r = await fetch(API,{cache:'no-store'});
-      if(!r.ok) throw new Error(`HTTP ${r.status}`);
+  async function fetchPrices() {
+    try {
+      const r = await fetch(API, {cache: 'no-store'});
+      if (!r.ok) throw new Error('HTTP ' + r.status);
       const d = await r.json();
 
       els.btcP.textContent = fmtPrice(d.bitcoin.usd);
-      const bc = fmtChange(d.bitcoin.usd_24h_change);
-      els.btcC.innerHTML = bc.text;
+      els.btcC.innerHTML = fmtChange(d.bitcoin.usd_24h_change);
 
       els.ethP.textContent = fmtPrice(d.ethereum.usd);
-      const ec = fmtChange(d.ethereum.usd_24h_change);
-      els.ethC.innerHTML = ec.text;
+      els.ethC.innerHTML = fmtChange(d.ethereum.usd_24h_change);
 
-      els.upd.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
-      clearErr();
-    }catch(e){
-      console.error(e);
-      showErr('Cannot connect to price server!');
+      els.solP.textContent = fmtPrice(d.solana.usd);
+      els.solC.innerHTML = fmtChange(d.solana.usd_24h_change);
+
+      const now = new Date();
+      els.upd.textContent = 'Last updated: ' + now.toLocaleString();
+      els.err.textContent = '';
+    } catch (e) {
+      els.err.textContent = 'ERROR: Crypto prices offline. Retrying...';
     }
   }
 
-  // ==== COPY ====
-  function copyAddr(id,btn){
-    const txt = $(id).textContent;
-    navigator.clipboard.writeText(txt).then(()=>{
-      const orig = btn.innerHTML;
+  function copyAddr(id, btn) {
+    const text = $(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const old = btn.innerHTML;
       btn.innerHTML = 'Copied!';
-      setTimeout(()=>btn.innerHTML=orig,1500);
-    }).catch(()=>alert('Copy failed!'));
+      setTimeout(() => btn.innerHTML = old, 1500);
+    });
   }
 
-  // ==== INIT ====
-  Object.entries(WALLETS).forEach(([k,v])=>$(k+'-wallet').textContent=v);
+  // INIT
+  Object.entries(WALLETS).forEach(([k, v]) => $(k + '-wallet').textContent = v);
   fetchPrices();
-  setInterval(fetchPrices,UPDATE_MS);
+  setInterval(fetchPrices, 30000); // every 30 sec
 </script>
 
 </body>

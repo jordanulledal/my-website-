@@ -1,326 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BitChat Crypto Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* -------------------------------------------------
-           GLOBAL RESET & TYPOGRAPHY
-        ------------------------------------------------- */
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{
-            font-family:'Inter',sans-serif;
-            background:#0d0b1e;
-            color:#e2e8f0;
-            min-height:100vh;
-            overflow-x:hidden;
-            position:relative;
-        }
-        .bg-orb{
-            position:absolute;
-            inset:0;
-            background:radial-gradient(circle at 30% 70%,rgba(0,255,255,0.15),transparent 50%),
-                       radial-gradient(circle at 70% 30%,rgba(255,0,255,0.15),transparent 50%);
-            pointer-events:none;
-            animation:orb 20s infinite alternate;
-        }
-        @keyframes orb{0%{transform:scale(1) rotate(0deg);}100%{transform:scale(1.2) rotate(5deg);}}
-
-        /* -------------------------------------------------
-           CONTAINER & HEADER
-        ------------------------------------------------- */
-        .container{max-width:1200px;margin:0 auto;padding:20px;}
-        .header{text-align:center;margin-bottom:40px;}
-        .header h1{
-            font-size:2.8rem;font-weight:700;
-            background:linear-gradient(135deg,#00ffff,#ff00ff);
-            -webkit-background-clip:text;background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
-        .header p{font-size:1rem;color:#94a3b8;}
-
-        /* -------------------------------------------------
-           GRID & CARD (glass-morphism)
-        ------------------------------------------------- */
-        .crypto-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-            gap:20px;
-            margin-bottom:30px;
-        }
-        .card{
-            background:rgba(255,255,255,0.06);
-            backdrop-filter:blur(12px);
-            -webkit-backdrop-filter:blur(12px);
-            border:1px solid rgba(255,255,255,0.1);
-            border-radius:20px;
-            padding:24px;
-            transition:transform .3s,box-shadow .3s;
-            position:relative;
-            overflow:hidden;
-        }
-        .card::before{
-            content:'';position:absolute;top:0;left:0;right:0;height:4px;
-            background:linear-gradient(90deg,#00ffff,#ff00ff);
-            opacity:0;transition:opacity .3s;
-        }
-        .card:hover{
-            transform:translateY(-8px);
-            box-shadow:0 20px 40px rgba(0,255,255,0.15);
-        }
-        .card:hover::before{opacity:1;}
-
-        .card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-        .icon{
-            width:48px;height:48px;
-            border-radius:14px;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.6rem;
-            background:linear-gradient(135deg,#00ffff,#ff00ff);
-            color:#0d0b1e;
-        }
-        .title{font-size:1.25rem;font-weight:600;}
-        .symbol{font-size:0.85rem;color:#94a3b8;text-transform:uppercase;}
-
-        .price{font-size:2.1rem;font-weight:700;margin:12px 0;}
-        .change{
-            display:inline-flex;align-items:center;
-            padding:6px 12px;border-radius:999px;
-            font-weight:600;font-size:0.9rem;
-        }
-        .positive{background:rgba(0,255,128,0.15);color:#00ff80;}
-        .negative{background:rgba(255,0,128,0.15);color:#ff4081;}
-
-        /* -------------------------------------------------
-           WALLET SECTION (chat-bubble style)
-        ------------------------------------------------- */
-        .wallet-section{
-            background:rgba(255,255,255,0.06);
-            backdrop-filter:blur(12px);
-            -webkit-backdrop-filter:blur(12px);
-            border:1px solid rgba(255,255,255,0.1);
-            border-radius:20px;
-            padding:24px;
-            margin-top:20px;
-        }
-        .wallet-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-        .wallet-icon{
-            width:40px;height:40px;
-            border-radius:12px;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.4rem;
-            background:linear-gradient(135deg,#00ffff,#ff00ff);
-            color:#0d0b1e;
-        }
-        .wallet-title{font-weight:600;font-size:1.2rem;}
-
-        .addr-box{
-            background:rgba(0,0,0,0.2);
-            border:1px solid rgba(255,255,255,0.15);
-            border-radius:14px;
-            padding:16px;
-            display:flex;gap:12px;align-items:center;
-            flex-wrap:wrap;
-        }
-        .addr{
-            font-family:'Courier New',monospace;
-            font-size:0.9rem;
-            color:#00ffff;
-            word-break:break-all;
-            flex:1;
-        }
-        .copy-btn{
-            background:linear-gradient(135deg,#00ffff,#ff00ff);
-            color:#0d0b1e;
-            border:none;
-            padding:10px 20px;
-            border-radius:999px;
-            cursor:pointer;
-            font-weight:600;
-            transition:transform .2s,box-shadow .2s;
-        }
-        .copy-btn:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(0,255,255,0.4);}
-        .copy-btn:active{transform:scale(0.98);}
-
-        /* -------------------------------------------------
-           FOOTER & UTILITIES
-        ------------------------------------------------- */
-        .footer{margin-top:40px;text-align:center;color:#64748b;font-size:0.85rem;}
-        .error{
-            background:rgba(255,64,129,0.15);
-            border:1px solid rgba(255,64,129,0.3);
-            color:#ff4081;
-            padding:12px 16px;
-            border-radius:12px;
-            margin-bottom:20px;
-            display:flex;align-items:center;gap:8px;
-        }
-        .loading{color:#94a3b8;font-style:italic;}
-        .pulse{animation:pulse 1.5s infinite;}
-        @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
-
-        @media(max-width:768px){
-            .header h1{font-size:2.2rem;}
-            .price{font-size:1.8rem;}
-            .addr-box{flex-direction:column;}
-            .copy-btn{width:100%;}
-        }
-    </style>
+<title>Crypto Price Tracker - 2000 Edition</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+  body,td,th {font-family:Arial,Helvetica,sans-serif; font-size:12px; color:#000000;}
+  body {background:#ffffff; margin:10px;}
+  a {color:#0000ee; text-decoration:underline;}
+  a:visited {color:#551a8b;}
+  table {border-collapse:collapse; width:100%; max-width:800px; margin:0 auto;}
+  td,th {border:1px solid #000000; padding:6px; vertical-align:top;}
+  .header {background:#0000ff; color:#ffffff; font-weight:bold; text-align:center;}
+  .price {font-family:"Comic Sans MS",cursive; font-size:18px; font-weight:bold;}
+  .positive {color:#008000; animation:blink 1s infinite;}
+  .negative {color:#ff0000; animation:blink 1s infinite;}
+  .center {text-align:center;}
+  .small {font-size:10px; color:#666666;}
+  .marquee {font-weight:bold; color:#ff0000;}
+  .blink {animation:blink 1s infinite;}
+  @keyframes blink {0%,100%{opacity:1}50%{opacity:0}}
+  .logo {font-family:"Times New Roman",serif; font-size:28px; font-weight:bold; color:#0000ff;}
+  .under {color:#ff9900; font-style:italic;}
+  .copybtn {background:#c0c0c0; border:2px outset #ffffff; padding:2px 6px; cursor:hand; font-weight:bold;}
+  .copybtn:active {border:2px inset #ffffff;}
+</style>
 </head>
 <body>
-    <div class="bg-orb"></div>
-    <div class="container">
-        <!-- HEADER -->
-        <div class="header">
-            <h1>BitChat Crypto</h1>
-            <p>Real-time prices & your wallets</p>
-        </div>
 
-        <div id="error-message"></div>
+<center>
+<span class="logo">Crypto Price Tracker 2000</span><br>
+<font size="2" color="#666666">Best viewed in Netscape Navigator 4.7</font>
+<br><br>
 
-        <!-- PRICE GRID -->
-        <div class="crypto-grid">
-            <!-- BTC -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="icon">Bitcoin</div>
-                    <div>
-                        <div class="title">Bitcoin</div>
-                        <div class="symbol">BTC</div>
-                    </div>
-                </div>
-                <div class="price" id="btc-price"><span class="loading pulse">Loading…</span></div>
-                <div class="change" id="btc-change"></div>
-            </div>
+<marquee class="marquee" behavior="scroll" direction="left">
+*** LIVE PRICES *** BITCOIN *** ETHEREUM *** SOLANA *** UPDATED EVERY 30 SECONDS ***
+</marquee>
+</center>
 
-            <!-- ETH -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="icon">Ethereum</div>
-                    <div>
-                        <div class="title">Ethereum</div>
-                        <div class="symbol">ETH</div>
-                    </div>
-                </div>
-                <div class="price" id="eth-price"><span class="loading pulse">Loading…</span></div>
-                <div class="change" id="eth-change"></div>
-            </div>
-        </div>
+<div id="error-message" style="text-align:center;color:red;font-weight:bold;"></div>
 
-        <!-- WALLETS -->
-        <!-- BTC Wallet -->
-        <div class="wallet-section">
-            <div class="wallet-header">
-                <div class="wallet-icon">Bitcoin</div>
-                <div class="wallet-title">Bitcoin Wallet</div>
-            </div>
-            <div class="addr-box">
-                <div class="addr" id="btc-wallet">1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd</div>
-                <button class="copy-btn" onclick="copyAddr('btc-wallet',this)">Copy</button>
-            </div>
-        </div>
+<table cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="2" class="header">CRYPTOCURRENCY PRICES</td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <b>Bitcoin (BTC)</b><br>
+      <span class="price" id="btc-price">Loading...</span><br>
+      <span id="btc-change"></span>
+    </td>
+    <td width="50%">
+      <b>Ethereum (ETH)</b><br>
+      <span class="price" id="eth-price">Loading...</span><br>
+      <span id="eth-change"></span>
+    </td>
+  </tr>
+</table>
 
-        <!-- ETH Wallet -->
-        <div class="wallet-section">
-            <div class="wallet-header">
-                <div class="wallet-icon">Ethereum</div>
-                <div class="wallet-title">Ethereum Wallet</div>
-            </div>
-            <div class="addr-box">
-                <div class="addr" id="eth-wallet">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</div>
-                <button class="copy-btn" onclick="copyAddr('eth-wallet',this)">Copy</button>
-            </div>
-        </div>
+<br>
 
-        <!-- SOL Wallet -->
-        <div class="wallet-section">
-            <div class="wallet-header">
-                <div class="wallet-icon">Solana</div>
-                <div class="wallet-title">Solana Wallet</div>
-            </div>
-            <div class="addr-box">
-                <div class="addr" id="sol-wallet">7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA</div>
-                <button class="copy-btn" onclick="copyAddr('sol-wallet',this)">Copy</button>
-            </div>
-        </div>
+<table cellspacing="0" cellpadding="0">
+  <tr><td colspan="2" class="header">MY WALLET ADDRESSES</td></tr>
+  <tr>
+    <td><b>Bitcoin Wallet:</b></td>
+    <td>
+      <tt><span id="btc-wallet">1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd</span></tt>
+      <button class="copybtn" onclick="copyAddr('btc-wallet',this)">Copy</button>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Ethereum Wallet:</b></td>
+    <td>
+      <tt><span id="eth-wallet">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span></tt>
+      <button class="copybtn" onclick="copyAddr('eth-wallet',this)">Copy</button>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Solana Wallet:</b></td>
+    <td>
+      <tt><span id="sol-wallet">7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA</span></tt>
+      <button class="copybtn" onclick="copyAddr('sol-wallet',this)">Copy</button>
+    </td>
+  </tr>
+</table>
 
-        <div class="footer" id="last-updated">Connecting…</div>
-    </div>
+<br>
+<center>
+<div id="last-updated" class="small">Connecting to server...</div>
+<br>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="88" height="31" alt="Under Construction">
+<span class="under">Under Construction - More coins coming soon!</span>
+<br><br>
+<font size="1">© 2025 Crypto2000 Inc. All Rights Reserved.</font>
+</center>
 
-    <!-- -------------------------------------------------
-         SCRIPT (30 s refresh, copy, error handling)
-    ------------------------------------------------- -->
-    <script>
-        // ==== CONFIG ====
-        const WALLETS = {
-            btc: '1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd',
-            eth: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
-            sol: '7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA'
-        };
-        const UPDATE_MS = 30_000;
-        const API = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true';
+<script>
+  // ==== CONFIG ====
+  const WALLETS = {
+    btc: '1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd',
+    eth: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+    sol: '7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA'
+  };
+  const UPDATE_MS = 30000;
+  const API = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true';
 
-        // ==== DOM CACHE ====
-        const $ = id => document.getElementById(id);
-        const els = {
-            btcP: $('btc-price'), btcC: $('btc-change'),
-            ethP: $('eth-price'), ethC: $('eth-change'),
-            upd:  $('last-updated'), err: $('error-message')
-        };
+  // ==== DOM ====
+  const $ = id => document.getElementById(id);
+  const els = {
+    btcP: $('btc-price'), btcC: $('btc-change'),
+    ethP: $('eth-price'), ethC: $('eth-change'),
+    upd:  $('last-updated'), err: $('error-message')
+  };
 
-        // ==== HELPERS ====
-        const fmtPrice = n => `$${n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
-        const fmtChange = v => {
-            const sign = v>=0?'up':'down';
-            const cls  = v>=0?'positive':'negative';
-            return {text:`${sign} ${Math.abs(v).toFixed(2)}%`,cls};
-        };
-        const showErr = msg => els.err.innerHTML = `<div class="error" role="alert">Warning ${msg}</div>`;
-        const clearErr = () => els.err.innerHTML = '';
+  // ==== HELPERS ====
+  const fmtPrice = n => `$${n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+  const fmtChange = v => {
+    const sign = v>=0?'up':'down';
+    const cls  = v>=0?'positive':'negative';
+    const txt  = `${sign} ${Math.abs(v).toFixed(2)}%`;
+    return {text: `<font class="${cls}">${txt}</font>`, cls};
+  };
+  const showErr = msg => els.err.innerHTML = `<b>ERROR:</b> ${msg}`;
+  const clearErr = () => els.err.innerHTML = '';
 
-        // ==== FETCH PRICES ====
-        async function fetchPrices(){
-            try{
-                const r = await fetch(API,{cache:'no-store'});
-                if(!r.ok) throw new Error(`HTTP ${r.status}`);
-                const d = await r.json();
+  // ==== FETCH ====
+  async function fetchPrices(){
+    try{
+      const r = await fetch(API,{cache:'no-store'});
+      if(!r.ok) throw new Error(`HTTP ${r.status}`);
+      const d = await r.json();
 
-                // BTC
-                els.btcP.textContent = fmtPrice(d.bitcoin.usd);
-                const bc = fmtChange(d.bitcoin.usd_24h_change);
-                els.btcC.textContent = bc.text;
-                els.btcC.className = `change ${bc.cls}`;
+      els.btcP.textContent = fmtPrice(d.bitcoin.usd);
+      const bc = fmtChange(d.bitcoin.usd_24h_change);
+      els.btcC.innerHTML = bc.text;
 
-                // ETH
-                els.ethP.textContent = fmtPrice(d.ethereum.usd);
-                const ec = fmtChange(d.ethereum.usd_24h_change);
-                els.ethC.textContent = ec.text;
-                els.ethC.className = `change ${ec.cls}`;
+      els.ethP.textContent = fmtPrice(d.ethereum.usd);
+      const ec = fmtChange(d.ethereum.usd_24h_change);
+      els.ethC.innerHTML = ec.text;
 
-                els.upd.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
-                clearErr();
-            }catch(e){
-                console.error(e);
-                showErr('Unable to fetch prices – retrying…');
-            }
-        }
+      els.upd.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+      clearErr();
+    }catch(e){
+      console.error(e);
+      showErr('Cannot connect to price server!');
+    }
+  }
 
-        // ==== COPY ADDRESS ====
-        function copyAddr(id,btn){
-            const txt = $(id).textContent;
-            navigator.clipboard.writeText(txt).then(()=>{
-                const orig = btn.textContent;
-                btn.textContent = 'Copied!';
-                setTimeout(()=>btn.textContent=orig,2000);
-            }).catch(()=>alert('Copy failed'));
-        }
+  // ==== COPY ====
+  function copyAddr(id,btn){
+    const txt = $(id).textContent;
+    navigator.clipboard.writeText(txt).then(()=>{
+      const orig = btn.innerHTML;
+      btn.innerHTML = 'Copied!';
+      setTimeout(()=>btn.innerHTML=orig,1500);
+    }).catch(()=>alert('Copy failed!'));
+  }
 
-        // ==== INIT ====
-        Object.entries(WALLETS).forEach(([k,v])=>$(k+'-wallet').textContent=v);
-        fetchPrices();
-        setInterval(fetchPrices,UPDATE_MS);
-    </script>
+  // ==== INIT ====
+  Object.entries(WALLETS).forEach(([k,v])=>$(k+'-wallet').textContent=v);
+  fetchPrices();
+  setInterval(fetchPrices,UPDATE_MS);
+</script>
+
 </body>
 </html>

@@ -7,139 +7,46 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     * { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      background: #f0f0f0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14px;
-      color: #1c1e21;
-      line-height: 1.34;
-    }
-    .topbar {
-      background: #ffffff;
-      border-bottom: 1px solid #dddfe2;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 56px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-    .logo {
-      font-family: "Comic Sans MS", cursive;
-      font-size: 24px;
-      font-weight: bold;
-      color: #000080;
-      text-decoration: none;
-    }
-    .nav {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
-    .nav-btn {
-      background: #e7f3ff;
-      color: #000080;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .nav-btn:hover { background: #d8efff; }
-    .nav-btn.active { background: #000080; color: white; }
+    body { background:#f0f0f0; font-family:Arial,sans-serif; font-size:14px; color:#1c1e21; }
+    .topbar { background:#fff; border-bottom:1px solid #ddd; position:fixed; top:0; left:0; right:0; height:56px; z-index:1000; display:flex; align-items:center; padding:0 16px; box-shadow:0 1px 2px rgba(0,0,0,0.05); }
+    .logo { font-family:"Comic Sans MS",cursive; font-size:24px; font-weight:bold; color:#000080; text-decoration:none; }
+    .nav { flex:1; display:flex; justify-content:center; gap:8px; }
+    .nav-btn { background:#e7f3ff; color:#000080; border:none; padding:8px 16px; border-radius:6px; font-weight:600; font-size:13px; cursor:pointer; }
+    .nav-btn:hover { background:#d8efff; }
+    .nav-btn.active { background:#000080; color:white; }
 
-    .container {
-      max-width: 500px;
-      margin: 70px auto 20px;
-      padding: 0 10px;
-    }
-    .card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      margin-bottom: 16px;
-      overflow: hidden;
-    }
-    .banner {
-      background: #ffff00;
-      color: #d80000;
-      font-weight: bold;
-      font-size: 11px;
-      text-align: center;
-      padding: 4px 0;
-      letter-spacing: 0.5px;
-      animation: blink 2s infinite;
-    }
+    .container { max-width:500px; margin:70px auto 20px; padding:0 10px; }
+    .card { background:white; border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.1); margin-bottom:16px; overflow:hidden; }
+    .banner { background:#ffff00; color:#d80000; font-weight:bold; font-size:11px; text-align:center; padding:4px 0; animation:blink 2s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.7} }
+    .welcome { text-align:center; padding:20px; color:#000080; font-family:"Comic Sans MS",cursive; }
+    .family-photo { width:100%; height:200px; object-fit:cover; border-bottom:3px solid #000080; }
+    .tiktok-box { text-align:center; padding:16px; background:#f8f9fa; border-top:1px solid #ddd; }
+    .tiktok-btn { background:#ff0050; color:white; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:14px; display:inline-block; margin-top:8px; }
 
-    .welcome {
-      text-align: center;
-      padding: 20px;
-      color: #000080;
-      font-family: "Comic Sans MS", cursive;
-    }
-    .family-photo {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-bottom: 3px solid #000080;
-    }
-    .tiktok-box {
-      text-align: center;
-      padding: 16px;
-      background: #f8f9fa;
-      border-top: 1px solid #dddfe2;
-    }
-    .tiktok-btn {
-      background: #ff0050;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      display: inline-block;
-      margin-top: 8px;
-    }
+    #auth, #post-form, #feed { display:none; }
+    .post { padding:12px; border-bottom:1px solid #ddd; }
+    .post img, .post video { max-width:100%; border-radius:6px; margin:8px 0; }
+    .post small { color:#65676b; font-size:12px; }
 
-    #auth, #post-form, #feed { display: none; }
-    .post { padding: 12px; border-bottom: 1px solid #dddfe2; }
-    .post img, .post video { max-width: 100%; border-radius: 6px; margin: 8px 0; }
-    .post small { color: #65676b; font-size: 12px; }
-
-    .footer {
-      text-align: center;
-      padding: 20px;
-      color: #8a8d91;
-      font-size: 12px;
-    }
-    .footer a { color: #0000ee; text-decoration: underline; margin: 0 4px; }
+    .footer { text-align:center; padding:20px; color:#8a8d91; font-size:12px; }
+    .footer a { color:#0000ee; text-decoration:underline; margin:0 4px; }
   </style>
 </head>
 <body>
 
-  <!-- TOP BAR -->
   <div class="topbar">
-    <a href="#" class="logo">The Family</a>
+    <a href="index.html" class="logo">The Family</a>
     <div class="nav">
-      <button class="nav-btn active" onclick="location.href='index.html'">Home</button>
+      <button class="nav-btn active">Home</button>
+      <button class="nav-btn" onclick="location.href='connections.html'">Connections</button>
       <button class="nav-btn" onclick="location.href='co-op.html'">Co-op</button>
-      <button class="nav-btn" onclick="alert('Coming soon!')">Crypto Tips</button>
-      <button class="nav-btn" onclick="alert('Coming soon!')">Guestbook</button>
     </div>
   </div>
 
   <div class="container">
-
-    <!-- THIN BANNER -->
     <div class="banner" id="btc-banner">*** LIVE BTC PRICE: Loading... ***</div>
 
-    <!-- WELCOME CARD -->
     <div class="card">
       <div class="welcome">
         <h1>Welcome to Our Family!</h1>
@@ -152,20 +59,12 @@
       </div>
     </div>
 
-    <!-- AUTH (LOGIN/SIGNUP) -->
+    <!-- AUTH -->
     <div id="auth" class="card" style="padding:20px;text-align:center;">
-      <h3 style="color:#000080;margin-bottom:12px;">Join the Family</h3>
+      <h3 style="color:#000080;">Join the Family</h3>
       <input type="email" id="email" placeholder="Email" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:6px;"><br>
       <input type="password" id="password" placeholder="Password" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:6px;"><br>
       <input type="text" id="invite-code" placeholder="Invite Code" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:6px;"><br>
-      <select id="birth-year" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:6px;">
-        <option value="">Birth Year (13+ only)</option>
-        <script>
-          for (let y = new Date().getFullYear() - 13; y >= 1920; y--) {
-            document.write(`<option value="${y}">${y}</option>`);
-          }
-        </script>
-      </select><br>
       <button class="nav-btn" style="width:100%;margin:8px 0;" onclick="signUp()">Sign Up</button>
       <button class="nav-btn" style="width:100%;background:#1877f2;color:white;" onclick="logIn()">Log In</button>
       <p id="auth-msg" style="color:red;margin-top:8px;"></p>
@@ -181,32 +80,24 @@
     <!-- FEED -->
     <div id="feed"></div>
 
-    <!-- FOOTER -->
     <div class="footer">
       © 2021-2025 The Family Club. All Rights Reserved.<br>
       <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Help</a>
     </div>
-
   </div>
 
 <script>
-  // === SUPABASE ===
   const SUPABASE_URL = 'https://your-project.supabase.co';  // CHANGE
   const SUPABASE_ANON_KEY = 'your-anon-key';                // CHANGE
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   let currentUser = null;
 
-  // === AUTH ===
   async function signUp() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const code = document.getElementById('invite-code').value;
-    const year = document.getElementById('birth-year').value;
-
-    if (!year || parseInt(year) > new Date().getFullYear() - 13) return showMsg('Must be 13+', 'red');
     const valid = ['FAMILY2025', 'ANNA', 'JORDAN'];
     if (!valid.includes(code.toUpperCase())) return showMsg('Invalid code', 'red');
-
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) showMsg(error.message, 'red');
     else showMsg('Check email to confirm!', 'green');
@@ -232,82 +123,48 @@
     document.getElementById('feed').style.display = 'block';
   }
 
-  // === POSTING ===
   async function createPost() {
     const content = document.getElementById('post-content').value;
     const file = document.getElementById('media-file').files[0];
     let mediaUrl = null;
-
     if (file) {
-      const { data, error } = await supabase.storage
-        .from('posts')
-        .upload(`public/${Date.now()}_${file.name}`, file);
-      if (error) { alert('Upload failed'); return; }
+      const { data, error } = await supabase.storage.from('posts').upload(`public/${Date.now()}_${file.name}`, file);
+      if (error) return alert('Upload failed');
       mediaUrl = `${SUPABASE_URL}/storage/v1/object/public/posts/${data.path}`;
     }
-
     await supabase.from('posts').insert({ user_id: currentUser.id, content, media_url: mediaUrl });
     document.getElementById('post-content').value = '';
     document.getElementById('media-file').value = '';
     loadFeed();
   }
 
-  // === FEED ===
   async function loadFeed() {
-    const { data: posts } = await supabase
-      .from('posts')
-      .select('*')
-      .order('created_at', { ascending: false });
-
+    const { data: posts } = await supabase.from('posts').select('*').order('created_at', { ascending: false });
     const feed = document.getElementById('feed');
     feed.innerHTML = '';
     posts.forEach(p => {
       const div = document.createElement('div');
       div.className = 'card post';
-      div.innerHTML = `
-        <b>${p.content.slice(0, 100)}${p.content.length > 100 ? '...' : ''}</b><br>
+      div.innerHTML = `<b>${p.content.slice(0,100)}${p.content.length > 100 ? '...' : ''}</b><br>
         <small>By ${p.user_id.slice(0,8)}... • ${new Date(p.created_at).toLocaleString()}</small>
-        ${p.media_url ? (p.media_url.includes('.mp4') ?
-          `<video controls style="max-height:300px;"><source src="${p.media_url}"></video>` :
-          `<img src="${p.media_url}">`) : ''}
-        <button onclick="report(${p.id})" style="font-size:12px;margin-top:8px;background:#ddd;border:none;padding:4px 8px;border-radius:4px;">Report</button>
-      `;
+        ${p.media_url ? (p.media_url.includes('.mp4') ? `<video controls style="max-height:300px;"><source src="${p.media_url}"></video>` : `<img src="${p.media_url}">`) : ''}`;
       feed.appendChild(div);
     });
   }
 
-  async function report(id) {
-    if (confirm('Report this post?')) {
-      await supabase.from('reports').insert({ post_id: id, reported_by: currentUser.id });
-      alert('Reported');
-    }
-  }
-
-  // === ON LOAD ===
   supabase.auth.getSession().then(({ data }) => {
-    if (data.session) {
-      currentUser = data.session.user;
-      showDashboard();
-      loadFeed();
-    } else {
-      document.getElementById('auth').style.display = 'block';
-    }
+    if (data.session) { currentUser = data.session.user; showDashboard(); loadFeed(); }
+    else document.getElementById('auth').style.display = 'block';
   });
 
-  // === BTC BANNER ===
   async function fetchPrices() {
     try {
-      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
       const d = await r.json();
-      document.getElementById('btc-banner').innerHTML = 
-        `*** BTC: $${d.bitcoin.usd.toLocaleString()} (${d.bitcoin.usd_24h_change > 0 ? '+' : ''}${d.bitcoin.usd_24h_change.toFixed(1)}%) ***`;
-    } catch (e) {
-      document.getElementById('btc-banner').innerHTML = '*** BTC: Offline ***';
-    }
+      document.getElementById('btc-banner').innerHTML = `*** BTC: $${d.bitcoin.usd.toLocaleString()} ***`;
+    } catch (e) { document.getElementById('btc-banner').innerHTML = '*** BTC: Offline ***'; }
   }
-  fetchPrices();
-  setInterval(fetchPrices, 30000);
+  fetchPrices(); setInterval(fetchPrices, 30000);
 </script>
-
 </body>
 </html>

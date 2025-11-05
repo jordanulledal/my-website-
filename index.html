@@ -3,253 +3,308 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Family World Wide Web Home Page</title>
+  <title>The Family Social</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin:0; padding:0; }
     body {
-      margin: 0;
-      background: #ffffff;
+      background: #f0f0f0;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 14px;
-      color: #000000;
-      line-height: 1.5;
-      padding: 10px;
+      color: #1c1e21;
+      line-height: 1.34;
     }
-    .container { max-width: 760px; margin: 0 auto; padding: 0 10px; }
-    .header {
-      background: #000080; color: #ffffff; font-weight: bold; font-size: 16px;
-      text-align: center; padding: 12px; border-radius: 8px 8px 0 0; margin-top: 10px;
+    .topbar {
+      background: #ffffff;
+      border-bottom: 1px solid #dddfe2;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
-    .title {
-      font-size: 32px; font-weight: bold; color: #000080; text-align: center;
-      margin: 20px 0 8px; font-family: "Times New Roman", serif;
+    .logo {
+      font-family: "Comic Sans MS", cursive;
+      font-size: 24px;
+      font-weight: bold;
+      color: #000080;
+      text-decoration: none;
     }
-    .subtitle { font-size: 18px; color: #000080; text-align: center; margin-bottom: 20px; }
-    .marquee {
-      background: #ffff00; color: #ff0000; font-weight: bold; padding: 10px;
-      text-align: center; font-size: 14px; margin: 10px 0; border-radius: 6px;
-      min-height: 20px; display: flex; align-items: center; justify-content: center;
+    .nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
     }
-    .welcome {
-      font-family: "Comic Sans MS", cursive; font-size: 20px; color: #ff0000;
-      text-align: center; font-weight: bold; animation: blink 1s infinite;
+    .nav-btn {
+      background: #e7f3ff;
+      color: #000080;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
     }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-    .hrule { border: 0; height: 3px; background: #000080; margin: 25px 0; border-radius: 2px; }
-    table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
-    th, td { padding: 12px; text-align: center; border: 1px solid #000; }
-    th { background: #f0f0f0; font-weight: bold; }
-    .price { font-family: "Comic Sans MS", cursive; font-size: 20px; font-weight: bold; color: #000080; }
-    .change-up { color: #006400; font-weight: bold; }
-    .change-down { color: #8B0000; font-weight: bold; }
-    .wallet { font-family: "Courier New", monospace; font-size: 12px; word-break: break-all; display: block; margin: 8px 0; }
-    .copybtn {
-      background: #c0c0c0; border: 2px outset #ffffff; font-size: 13px; padding: 6px 12px;
-      cursor: pointer; border-radius: 4px; margin-top: 8px;
+    .nav-btn:hover { background: #d8efff; }
+    .nav-btn.active { background: #000080; color: white; }
+
+    .container {
+      max-width: 500px;
+      margin: 70px auto 20px;
+      padding: 0 10px;
     }
-    .copybtn:active { border: 2px inset #ffffff; }
-    .bio { font-size: 13px; line-height: 1.5; margin-top: 8px; }
-    .footer { font-size: 12px; color: #666666; text-align: center; margin: 30px 0 20px; }
-    .footer a { color: #0000ee; text-decoration: underline; margin: 0 8px; }
-    .under-construction { text-align: center; margin: 25px 0; font-style: italic; }
-    .under-construction img { vertical-align: middle; margin-right: 8px; }
-    .tiktok-box {
-      text-align: center;
-      margin: 20px 0;
-      padding: 12px;
-      background: #f0f0f0;
-      border: 2px solid #000080;
+    .card {
+      background: white;
       border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .banner {
+      background: #ffff00;
+      color: #d80000;
+      font-weight: bold;
+      font-size: 11px;
+      text-align: center;
+      padding: 4px 0;
+      letter-spacing: 0.5px;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+    .welcome {
+      text-align: center;
+      padding: 20px;
+      color: #000080;
       font-family: "Comic Sans MS", cursive;
     }
+    .family-photo {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px solid #000080;
+    }
+    .tiktok-box {
+      text-align: center;
+      padding: 16px;
+      background: #f8f9fa;
+      border-top: 1px solid #dddfe2;
+    }
     .tiktok-btn {
-      display: inline-block;
       background: #ff0050;
       color: white;
-      font-weight: bold;
       padding: 8px 16px;
       border-radius: 6px;
       text-decoration: none;
-      margin-top: 8px;
+      font-weight: bold;
       font-size: 14px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    .tiktok-btn:hover { background: #cc0040; }
-    .tiktok-embed {
-      max-width: 100%;
-      margin: 20px auto;
-      text-align: center;
+      display: inline-block;
+      margin-top: 8px;
     }
 
-    @media (max-width: 768px) {
-      .responsive-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      table { min-width: 600px; }
+    #auth, #post-form, #feed { display: none; }
+    .post { padding: 12px; border-bottom: 1px solid #dddfe2; }
+    .post img, .post video { max-width: 100%; border-radius: 6px; margin: 8px 0; }
+    .post small { color: #65676b; font-size: 12px; }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #8a8d91;
+      font-size: 12px;
     }
-    @media (max-width: 600px) {
-      .title { font-size: 28px; } .subtitle { font-size: 16px; } .welcome { font-size: 18px; }
-      .marquee { font-size: 13px; padding: 8px; }
-    }
+    .footer a { color: #0000ee; text-decoration: underline; margin: 0 4px; }
   </style>
 </head>
 <body>
 
-<div class="container">
-
-  <div class="header">THE FAMILY WORLD WIDE WEB HOME PAGE - EST. 2021</div>
-
-  <div class="title">The Family</div>
-  <div class="subtitle">A Family Website with Live Crypto Prices!</div>
-
-  <div class="marquee" id="btc-banner">*** LIVE BTC PRICE: Loading... ***</div>
-
-  <div class="welcome">Welcome to Our Family Page!</div>
-  <p style="text-align:center;margin:15px 0;">We're holders of Bitcoin, Ethereum, and Solana!<br></p>
-
-  <hr class="hrule">
-
-  <!-- SUMMER 2025 FAMILY PHOTO (SMALL 150x150) -->
-  <div style="text-align:center;margin:20px 0;">
-    <img src="https://i.postimg.cc/C5zknfPL/IMG-4991.jpg" alt="The Family - Summer 2025" 
-         style="width:150px;height:150px;object-fit:cover;border:3px solid #000080;border-radius:8px;">
-    <p style="margin:8px 0 0;font-style:italic;color:#000080;"><i>The Family - Summer 2025</i></p>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <a href="#" class="logo">The Family</a>
+    <div class="nav">
+      <button class="nav-btn active" onclick="location.href='index.html'">Home</button>
+      <button class="nav-btn" onclick="location.href='co-op.html'">Co-op</button>
+      <button class="nav-btn" onclick="alert('Coming soon!')">Crypto Tips</button>
+      <button class="nav-btn" onclick="alert('Coming soon!')">Guestbook</button>
+    </div>
   </div>
 
-  <!-- TIKTOK PROMO + EMBEDDED VIDEO -->
-  <div class="tiktok-box">
-    <p style="margin:0 0 8px;font-size:18px;color:#ff0050;">
-      Follow us on TikTok!
-    </p>
-    <p style="margin:5px 0;font-size:15px;">
-      Follow us: <a href="https://tiktok.com/@thefamilycrypto" target="_blank" style="color:#000080;font-weight:bold;">@thefamilycrypto</a>
-    </p>
-    <a href="https://tiktok.com/@thefamilycrypto" target="_blank" class="tiktok-btn">
-      Follow Now!
-    </a>
-  </div>
+  <div class="container">
 
-  <!-- EMBEDDED TIKTOK VIDEO -->
-  <div class="tiktok-embed">
-    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@thefamilycrypto/video/123456789" data-video-id="123456789" style="max-width:325px;margin:0 auto;">
-      <section></section>
-    </blockquote>
-    <script async src="https://www.tiktok.com/embed.js"></script>
-  </div>
+    <!-- THIN BANNER -->
+    <div class="banner" id="btc-banner">*** LIVE BTC PRICE: Loading... ***</div>
 
-  <hr class="hrule">
-
-  <!-- CRYPTO PRICES -->
-  <div class="responsive-table">
-    <table class="price-grid">
-      <tr><th colspan="3">Live Cryptocurrency Prices</th></tr>
-      <tr>
-        <td><b>Bitcoin (BTC)</b><br><div class="price" id="btc-price">Loading...</div><div id="btc-change"></div></td>
-        <td><b>Ethereum (ETH)</b><br><div class="price" id="eth-price">Loading...</div><div id="eth-change"></div></td>
-        <td><b>Solana (SOL)</b><br><div class="price" id="sol-price">Loading...</div><div id="sol-change"></div></td>
-      </tr>
-    </table>
-  </div>
-  <div id="error-message" style="color:red;font-weight:bold;text-align:center;margin:10px 0;"></div>
-
-  <hr class="hrule">
-
-  <!-- WALLET ADDRESSES -->
-  <div class="responsive-table">
-    <table class="wallet-grid">
-      <tr><th colspan="2">Our Family Crypto Wallets</th></tr>
-      <tr><td><b>Bitcoin:</b></td><td><span class="wallet" id="btc-wallet">1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd</span><br><button class="copybtn" onclick="copyAddr('btc-wallet',this)">Copy BTC</button></td></tr>
-      <tr><td><b>Ethereum:</b></td><td><span class="wallet" id="eth-wallet">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span><br><button class="copybtn" onclick="copyAddr('eth-wallet',this)">Copy ETH</button></td></tr>
-      <tr><td><b>Solana:</b></td><td><span class="wallet" id="sol-wallet">7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA</span><br><button class="copybtn" onclick="copyAddr('sol-wallet',this)">Copy SOL</button></td></tr>
-    </table>
-  </div>
-
-  <hr class="hrule">
-
-  <!-- MEET THE FAMILY -->
-  <div style="text-align:center;margin:20px 0;">
-    <h2 style="color:#000080;font-family:'Times New Roman',serif;">Meet the Family</h2>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;padding:10px;">
-
-    <!-- Jordan -->
-    <div style="text-align:center;">
-      <img src="https://i.postimg.cc/MKDJpPfq/20230901-094534-Copy.jpg" alt="Jordan" 
-           style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">
-      <br><b>Jordan</b><br><i>Dad, Age 32</i>
-      <div class="bio">Programmer. Loves Cycling, hiking and being a Dad.</div>
+    <!-- WELCOME CARD -->
+    <div class="card">
+      <div class="welcome">
+        <h1>Welcome to Our Family!</h1>
+        <p>Private • Safe • Fun</p>
+      </div>
+      <img src="https://i.postimg.cc/C5zknfPL/IMG-4991.jpg" alt="Family" class="family-photo">
+      <div class="tiktok-box">
+        <p style="margin:0;font-size:16px;color:#ff0050;font-weight:bold;">Follow us on TikTok!</p>
+        <a href="https://tiktok.com/@thefamilycrypto" target="_blank" class="tiktok-btn">Follow Now!</a>
+      </div>
     </div>
 
-    <!-- Anna -->
-    <div style="text-align:center;">
-      <img src="https://i.postimg.cc/FsJhFgbn/mitenefa41f36c-424f-4f33-9421-b862b38e01b9.jpg" alt="Anna" 
-           style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">
-      <br><b>Anna</b><br><i>Mom, Age 25</i>
-      <div class="bio">Bakes the best muffins and loves being a Mom.</div>
+    <!-- AUTH (LOGIN/SIGNUP) -->
+    <div id="auth" class="card" style="padding:20px;text-align:center;">
+      <h3 style="color:#000080;margin-bottom:12px;">Join the Family</h3>
+      <input type="email" id="email" placeholder="Email" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:6px;"><br>
+      <input type="password" id="password" placeholder="Password" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:6px;"><br>
+      <input type="text" id="invite-code" placeholder="Invite Code" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:6px;"><br>
+      <select id="birth-year" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:6px;">
+        <option value="">Birth Year (13+ only)</option>
+        <script>
+          for (let y = new Date().getFullYear() - 13; y >= 1920; y--) {
+            document.write(`<option value="${y}">${y}</option>`);
+          }
+        </script>
+      </select><br>
+      <button class="nav-btn" style="width:100%;margin:8px 0;" onclick="signUp()">Sign Up</button>
+      <button class="nav-btn" style="width:100%;background:#1877f2;color:white;" onclick="logIn()">Log In</button>
+      <p id="auth-msg" style="color:red;margin-top:8px;"></p>
     </div>
 
-    <!-- Abraham -->
-    <div style="text-align:center;">
-      <img src="https://i.postimg.cc/DzGGqXKP/20230629-093843.jpg" alt="Abraham" 
-           style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #000080;">
-      <br><b>Abraham</b><br><i>Son, Age 3</i>
-      <div class="bio">Loves to ride his bike and hang at the beach.</div>
+    <!-- POST FORM -->
+    <div id="post-form" class="card" style="padding:16px;">
+      <textarea id="post-content" placeholder="What's on your mind?" style="width:100%;height:80px;padding:12px;border:1px solid #ddd;border-radius:6px;resize:none;"></textarea>
+      <input type="file" id="media-file" accept="image/*,video/*" style="margin:8px 0;">
+      <button class="nav-btn" style="width:100%;background:#42b72a;color:white;" onclick="createPost()">Post</button>
+    </div>
+
+    <!-- FEED -->
+    <div id="feed"></div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      © 2021-2025 The Family Club. All Rights Reserved.<br>
+      <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Help</a>
     </div>
 
   </div>
-
-  <hr class="hrule">
-
-  <div style="font-size:12px;color:#666666;text-align:center;" id="last-updated">Last updated: Loading...</div>
-
-  <div class="under-construction">
-    <img src="data:image/gif;base64,R0lGODlhFAALAIAAAAAAAP///yH5BAEAAAEALAAAAAAUAAkAAAIRhBEtpUu2cHyw1o2n0i8aoIqa7jYAOw==" width="77" height="11" alt="Under Construction">
-    <i>More crypto tips and family stories coming soon!</i>
-  </div>
-
-  <!-- FOOTER WITH CO-OP LINK -->
-  <div class="footer">
-    © 2021-2025 The Family Club. All Rights Reserved.<br>
-    <a href="#">Home</a> | <a href="#">Crypto Tips</a> | <a href="#">Guestbook</a> | <a href="#">Links</a> | <a href="co-op.html">Co-op</a>
-  </div>
-
-</div>
 
 <script>
-  const WALLETS = { btc: '1BLox8JacqYjRZX1JwZWApZPjYCDAgbLNd', eth: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F', sol: '7vB8v3xG4aQ3P9vN2mR8sT1uJ9kL5hP6oN4iX2cY1zA' };
-  const API = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true';
-  const $ = id => document.getElementById(id);
-  const els = { banner: $('btc-banner'), btcP: $('btc-price'), btcC: $('btc-change'), ethP: $('eth-price'), ethC: $('eth-change'), solP: $('sol-price'), solC: $('sol-change'), upd: $('last-updated'), err: $('error-message') };
-  const fmtPrice = n => `$${n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
-  const fmtChange = v => { const sign = v >= 0 ? '+' : ''; return ` (${sign}${v.toFixed(2)}%)`; };
-  async function fetchPrices() {
-    try {
-      const r = await fetch(API, {cache: 'no-store'});
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      const d = await r.json();
-      els.banner.innerHTML = `*** LIVE BTC PRICE: ${fmtPrice(d.bitcoin.usd)}${fmtChange(d.bitcoin.usd_24h_change)} ***`;
-      els.btcP.textContent = fmtPrice(d.bitcoin.usd);
-      els.btcC.innerHTML = `<span class="${d.bitcoin.usd_24h_change >= 0 ? 'change-up' : 'change-down'} blink">${d.bitcoin.usd_24h_change >= 0 ? 'up' : 'down'} ${Math.abs(d.bitcoin.usd_24h_change).toFixed(2)}%</span>`;
-      els.ethP.textContent = fmtPrice(d.ethereum.usd);
-      els.ethC.innerHTML = `<span class="${d.ethereum.usd_24h_change >= 0 ? 'change-up' : 'change-down'} blink">${d.ethereum.usd_24h_change >= 0 ? 'up' : 'down'} ${Math.abs(d.ethereum.usd_24h_change).toFixed(2)}%</span>`;
-      els.solP.textContent = fmtPrice(d.solana.usd);
-      els.solC.innerHTML = `<span class="${d.solana.usd_24h_change >= 0 ? 'change-up' : 'change-down'} blink">${d.solana.usd_24h_change >= 0 ? 'up' : 'down'} ${Math.abs(d.solana.usd_24h_change).toFixed(2)}%</span>`;
-      const now = new Date();
-      els.upd.textContent = 'Last updated: ' + now.toLocaleString();
-      els.err.textContent = '';
-    } catch (e) {
-      els.err.textContent = 'ERROR: Crypto prices offline. Retrying...';
-      els.banner.innerHTML = '*** LIVE BTC PRICE: Loading... ***';
-    }
+  // === SUPABASE ===
+  const SUPABASE_URL = 'https://your-project.supabase.co';  // CHANGE
+  const SUPABASE_ANON_KEY = 'your-anon-key';                // CHANGE
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let currentUser = null;
+
+  // === AUTH ===
+  async function signUp() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const code = document.getElementById('invite-code').value;
+    const year = document.getElementById('birth-year').value;
+
+    if (!year || parseInt(year) > new Date().getFullYear() - 13) return showMsg('Must be 13+', 'red');
+    const valid = ['FAMILY2025', 'ANNA', 'JORDAN'];
+    if (!valid.includes(code.toUpperCase())) return showMsg('Invalid code', 'red');
+
+    const { error } = await supabase.auth.signUp({ email, password });
+    if (error) showMsg(error.message, 'red');
+    else showMsg('Check email to confirm!', 'green');
   }
-  function copyAddr(id, btn) {
-    const text = $(id).textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      const old = btn.innerHTML;
-      btn.innerHTML = 'Copied!';
-      setTimeout(() => btn.innerHTML = old, 1500);
+
+  async function logIn() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value
+    });
+    if (error) showMsg(error.message, 'red');
+    else { currentUser = data.user; showDashboard(); loadFeed(); }
+  }
+
+  function showMsg(msg, color) {
+    const el = document.getElementById('auth-msg');
+    el.textContent = msg; el.style.color = color;
+  }
+
+  function showDashboard() {
+    document.getElementById('auth').style.display = 'none';
+    document.getElementById('post-form').style.display = 'block';
+    document.getElementById('feed').style.display = 'block';
+  }
+
+  // === POSTING ===
+  async function createPost() {
+    const content = document.getElementById('post-content').value;
+    const file = document.getElementById('media-file').files[0];
+    let mediaUrl = null;
+
+    if (file) {
+      const { data, error } = await supabase.storage
+        .from('posts')
+        .upload(`public/${Date.now()}_${file.name}`, file);
+      if (error) { alert('Upload failed'); return; }
+      mediaUrl = `${SUPABASE_URL}/storage/v1/object/public/posts/${data.path}`;
+    }
+
+    await supabase.from('posts').insert({ user_id: currentUser.id, content, media_url: mediaUrl });
+    document.getElementById('post-content').value = '';
+    document.getElementById('media-file').value = '';
+    loadFeed();
+  }
+
+  // === FEED ===
+  async function loadFeed() {
+    const { data: posts } = await supabase
+      .from('posts')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    const feed = document.getElementById('feed');
+    feed.innerHTML = '';
+    posts.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'card post';
+      div.innerHTML = `
+        <b>${p.content.slice(0, 100)}${p.content.length > 100 ? '...' : ''}</b><br>
+        <small>By ${p.user_id.slice(0,8)}... • ${new Date(p.created_at).toLocaleString()}</small>
+        ${p.media_url ? (p.media_url.includes('.mp4') ?
+          `<video controls style="max-height:300px;"><source src="${p.media_url}"></video>` :
+          `<img src="${p.media_url}">`) : ''}
+        <button onclick="report(${p.id})" style="font-size:12px;margin-top:8px;background:#ddd;border:none;padding:4px 8px;border-radius:4px;">Report</button>
+      `;
+      feed.appendChild(div);
     });
   }
-  Object.entries(WALLETS).forEach(([k, v]) => $(k + '-wallet').textContent = v);
+
+  async function report(id) {
+    if (confirm('Report this post?')) {
+      await supabase.from('reports').insert({ post_id: id, reported_by: currentUser.id });
+      alert('Reported');
+    }
+  }
+
+  // === ON LOAD ===
+  supabase.auth.getSession().then(({ data }) => {
+    if (data.session) {
+      currentUser = data.session.user;
+      showDashboard();
+      loadFeed();
+    } else {
+      document.getElementById('auth').style.display = 'block';
+    }
+  });
+
+  // === BTC BANNER ===
+  async function fetchPrices() {
+    try {
+      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+      const d = await r.json();
+      document.getElementById('btc-banner').innerHTML = 
+        `*** BTC: $${d.bitcoin.usd.toLocaleString()} (${d.bitcoin.usd_24h_change > 0 ? '+' : ''}${d.bitcoin.usd_24h_change.toFixed(1)}%) ***`;
+    } catch (e) {
+      document.getElementById('btc-banner').innerHTML = '*** BTC: Offline ***';
+    }
+  }
   fetchPrices();
   setInterval(fetchPrices, 30000);
 </script>
